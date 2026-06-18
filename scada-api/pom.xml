@@ -22,6 +22,10 @@
             <artifactId>scada-clickhouse</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.nuclear.scada</groupId>
+            <artifactId>scada-kafka</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

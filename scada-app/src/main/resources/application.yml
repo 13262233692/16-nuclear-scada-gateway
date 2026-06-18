@@ -15,19 +15,30 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      acks: 1
+      acks: all
       batch-size: 65536
       linger-ms: 5
       compression-type: lz4
       buffer-memory: 67108864
       enable-idempotence: true
+      max-in-flight-requests-per-connection: 5
+      retries: 10
+      delivery-timeout-ms: 120000
     consumer:
       group-id: scada-clickhouse-writer
       auto-offset-reset: latest
       enable-auto-commit: false
-      max-poll-records: 1000
+      max-poll-records: 500
       fetch-min-size: 1024
       fetch-max-wait: 100ms
+      properties:
+        max.poll.interval.ms: 300000
+        session.timeout.ms: 120000
+        heartbeat.interval.ms: 30000
+        request.timeout.ms: 130000
+        isolation.level: read_committed
+        default.api.timeout.ms: 60000
+        connections.max.idle.ms: 540000
   datasource:
     url: jdbc:clickhouse://localhost:8123/scada
     username: default
@@ -50,7 +61,15 @@ scada:
     consumer:
       poll-timeout-ms: 100
       batch-size: 5000
-      flush-interval-ms: 500
+      write-queue-capacity: 50000
+      write-thread-count: 4
+      max-poll-interval-ms: 300000
+      session-timeout-ms: 120000
+      heartbeat-interval-ms: 30000
+      max-poll-records: 500
+      retry-max-attempts: 3
+      retry-backoff-ms: 1000
+      commit-interval-ms: 5000
 
 management:
   endpoints:
