@@ -70,6 +70,17 @@ scada:
       retry-max-attempts: 3
       retry-backoff-ms: 1000
       commit-interval-ms: 5000
+  fault-tracing:
+    max-search-depth: 6
+    anomaly-time-window-minutes: 5
+    min-root-cause-probability: 0.3
+
+spring:
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: scada1234
 
 management:
   endpoints:

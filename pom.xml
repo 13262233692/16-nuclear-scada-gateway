@@ -25,6 +25,7 @@
         <module>scada-clickhouse</module>
         <module>scada-api</module>
         <module>scada-app</module>
+        <module>scada-fault-tracing</module>
     </modules>
 
     <properties>
@@ -32,6 +33,9 @@
         <netty.version>4.1.109.Final</netty.version>
         <kafka.version>3.4.1</kafka.version>
         <clickhouse-jdbc.version>0.4.6</clickhouse-jdbc.version>
+        <neo4j-ogm.version>3.2.41</neo4j-ogm.version>
+        <spring-data-neo4j.version>6.3.22</spring-data-neo4j.version>
+        <neo4j-java-driver.version>4.4.14</neo4j-java-driver.version>
         <lombok.version>1.18.32</lombok.version>
         <jackson.version>2.15.4</jackson.version>
     </properties>
@@ -70,6 +74,17 @@
             </dependency>
 
             <dependency>
+                <groupId>org.neo4j.driver</groupId>
+                <artifactId>neo4j-java-driver</artifactId>
+                <version>${neo4j-java-driver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-neo4j</artifactId>
+                <version>${spring-data-neo4j.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.nuclear.scada</groupId>
                 <artifactId>scada-common</artifactId>
                 <version>${project.version}</version>
@@ -97,6 +112,11 @@
             <dependency>
                 <groupId>com.nuclear.scada</groupId>
                 <artifactId>scada-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nuclear.scada</groupId>
+                <artifactId>scada-fault-tracing</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
